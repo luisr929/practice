@@ -28,6 +28,20 @@ public class AddEmployeePage extends CommonMethods {
         @FindBy(xpath = "(//a[normalize-space()='46648316'])[1]")
     public WebElement actualId;
 
+        @FindBy(id = "re_password")
+    public WebElement passwordTextBox2;
+
+        @FindBy(id = "photofile")
+    public WebElement photoButton;
+
+        @FindBy(id = "user_name")
+    public WebElement userNameTextBox;
+        @FindBy(id= "user_password")
+    public WebElement passwordTextBox;
+
+        @FindBy(id = "chkLogin")
+    public WebElement createLoginDetails;
+
         public AddEmployeePage(){
             PageFactory.initElements(driver,this);
         }

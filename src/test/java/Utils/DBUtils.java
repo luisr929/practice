@@ -10,15 +10,18 @@ public class DBUtils {
 
     public static List<Map<String,String>> fetch(String query){
 
-        String dbUrl= ConfigReader.getPropertyValue("dbUrl");
-        String dbUserName= ConfigReader.getPropertyValue("dbUsername");
-        String dbPassword= ConfigReader.getPropertyValue("dbPassword");
+
+        String dbUrl = ConfigReader.getPropertyValue("dbUrl");
+        String dbUserName =ConfigReader.getPropertyValue("dbUser");
+      //  String dbUserName = ConfigReader.getPropertyValue("dbUser");
+        String dbPassword = ConfigReader.getPropertyValue("dbPassword");
         List<Map<String,String>> mapList= new ArrayList<>();
-        try(Connection connection = DriverManager.getConnection(dbUrl,dbUserName,dbPassword);
-            Statement statement=connection.createStatement();
+        try(Connection connection = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
-            ) {
-            ResultSetMetaData metaData= resultSet.getMetaData();
+        ) {
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            // gives us the no of columns in the resultSet
             int columnCount = metaData.getColumnCount();
 
             while (resultSet.next()){
@@ -28,13 +31,14 @@ public class DBUtils {
                     String value=resultSet.getString(i);
                     rowMap.put(key,value);
                 }
+
                 mapList.add(rowMap);
             }
 
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return mapList;
     }
+
 }

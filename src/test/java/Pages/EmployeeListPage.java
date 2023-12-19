@@ -24,7 +24,7 @@ public class EmployeeListPage extends CommonMethods {
     @FindBy(xpath = "//input[@id='btnTerminateEmployement']")
     public WebElement terminateEmployeeButton;
 
-    @FindBy(xpath = "//table[@id='resultTable']//td[2]")
+    @FindBy(xpath = "//table[@id='resultTable']/tbody/tr/td[2]")
     public WebElement employeeTable;
 
     @FindBy(xpath = "//select[@id='terminate_reason']")
@@ -43,6 +43,10 @@ public class EmployeeListPage extends CommonMethods {
     public WebElement employeeListButton;
     @FindBy(xpath = "//input[@id='searchBtn']")
     public WebElement employeeSearchButton;
+
+
+   // @FindBy(xpath = "(//table/tbody/tr/td[2]")
+    //public WebElement realId;
 
     public EmployeeListPage(){
         PageFactory.initElements(driver,this);

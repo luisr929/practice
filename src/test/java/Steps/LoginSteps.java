@@ -2,6 +2,8 @@ package Steps;
 
 import Utils.CommonMethods;
 import Utils.ConfigReader;
+import Utils.Constants;
+import Utils.ExcelReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
@@ -31,4 +33,9 @@ public class LoginSteps extends CommonMethods {
         System.out.println(expectedMessage);
 
     }
+    @Then("user must read excelfile")
+    public void user_must_read_excelfile() {
+        System.out.println(ExcelReader.read("EmployeeDataBatch16", Constants.EXCEL_READER_PATH));
+    }
+
 }

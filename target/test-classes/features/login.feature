@@ -5,3 +5,4 @@ Feature: User is able to login
     Given driver is made and navigates to the url
     And user enters credentials and presses enter
     Then User is naviagted to home page
+    Then user must read excelfile
