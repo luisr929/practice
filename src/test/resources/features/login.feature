@@ -6,3 +6,7 @@ Feature: User is able to login
     And user enters credentials and presses enter
     Then User is naviagted to home page
     Then user must read excelfile
+
+    @google
+    Scenario: user is able to login into application
+      When

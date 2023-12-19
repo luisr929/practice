@@ -46,6 +46,16 @@ Feature: Adding an employee
               And employee is added successfully
               Then user verfy in the database
 
+              @dependants
+              Scenario: admin adding dependants to employee profile
+                When use adds "Lu" and "wavy" and "king"
+                And user clicks on save button
+                And user clicks dependants tab
+                And user presses add button and provides the enters the information needed and clicks save
+                Then employees dependants are save successfully
+
+
+
 
 
 

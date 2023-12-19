@@ -42,6 +42,30 @@ public class AddEmployeePage extends CommonMethods {
         @FindBy(id = "chkLogin")
     public WebElement createLoginDetails;
 
+        @FindBy(xpath = "//a[text()='Dependents']")
+        public WebElement dependantsTab;
+
+        @FindBy(id = "dependent_name")
+        public WebElement dependantName;
+
+        @FindBy(id = "dependent_relationshipType")
+        public WebElement relationshipDropDown;
+
+        @FindBy(id = "btnSaveDependent")
+        public WebElement dependantsSaveButton;
+
+        @FindBy(id = "dependent_dateOfBirth")
+        public WebElement dependantsCal;
+
+        @FindBy(id = "btnAddDependent")
+        public WebElement dependantAddButton;
+
+        @FindBy(xpath = "//table[@class='ui-datepicker-calendar']/tbody/tr/td")
+        public WebElement dependantsCalDate;
+
+
+
+
         public AddEmployeePage(){
             PageFactory.initElements(driver,this);
         }

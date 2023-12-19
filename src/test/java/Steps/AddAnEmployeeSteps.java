@@ -9,9 +9,11 @@ import Utils.ExcelReader;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.it.Ma;
+import io.opentelemetry.api.internal.Utils;
 import org.apache.commons.collections4.functors.WhileClosure;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.*;
 
@@ -164,7 +166,37 @@ public class AddAnEmployeeSteps extends CommonMethods {
         Assert.assertEquals("lastname from front end does not match lastname from database", lastName, dbLastName);
         System.out.println(firstName+lastName+middleName);
     }
+    @When("user clicks dependants tab")
+    public void user_clicks_dependants_tab() {
+        click(addEmployeePage.dependantsTab);
+    }
+    @When("user presses add button and provides the enters the information needed and clicks save")
+    public void user_presses_add_button_and_provides_the_enters_the_information_needed_and_clicks_save() {
+        click(addEmployeePage.dependantAddButton);
+        sendText("babyLu",addEmployeePage.dependantName);
+        selectFromDropDown(addEmployeePage.relationshipDropDown,"Child");
+        click(addEmployeePage.dependantsCal);
+        boolean isFound=false;
+        while (!isFound){
+            List<WebElement>calDate=driver.findElements(By.xpath("//table[@class='ui-datepicker-calendar']/tbody/tr/td"));
+            for (WebElement date : calDate) {
+                String getDate=date.getText();
+                if (getDate.equalsIgnoreCase("15")){
+                    System.out.println(getDate);
+                    click(date);
+                    isFound=true;
+                    break;
+                }
+            }
+        }
 
+        click(addEmployeePage.dependantsSaveButton);
+
+    }
+    @Then("employees dependants are save successfully")
+    public void employees_dependants_are_save_successfully() {
+
+    }
 
 
 }
