@@ -14,7 +14,7 @@ import org.apache.commons.collections4.functors.WhileClosure;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
+import Utils.ConfigReader;
 import java.util.*;
 
 public class AddAnEmployeeSteps extends CommonMethods {
@@ -23,38 +23,40 @@ public class AddAnEmployeeSteps extends CommonMethods {
     String firstName;
     String middleName;
     String lastName;
+    String name;
 
 
     @When("user clicks on add an employee button")
     public void user_clicks_on_add_an_employee_button() {
-    click(addEmployeePage.addEmployeeButton);
+        click(addEmployeePage.addEmployeeButton);
 
     }
+
     @When("user enters employees information and clicks save button")
     public void user_enters_employees_information_and_clicks_save_button() {
-        sendText("moneyman"+ Math.random(), addEmployeePage.firstNameTextBox);
-        sendText("coder"+ Math.random(), addEmployeePage.middleNameTextBox);
-        sendText("king"+ Math.random(), addEmployeePage.lastNameTextBox);
-        employeeId=addEmployeePage.empIDField.getAttribute("value");
+        sendText("moneyman" + Math.random(), addEmployeePage.firstNameTextBox);
+        sendText("coder" + Math.random(), addEmployeePage.middleNameTextBox);
+        sendText("king" + Math.random(), addEmployeePage.lastNameTextBox);
+        employeeId = addEmployeePage.empIDField.getAttribute("value");
         System.out.println(employeeId);
         click(addEmployeePage.saveButton);
 
 
     }
+
     @Then("new user will be created")
     public void new_user_will_be_created() throws InterruptedException {
         click(homePage.pimButton);
-       click(employeeListPage.employeeListButton);
-       click(employeeListPage.employeeIdSearchBox);
-       sendText(employeeId, employeeListPage.employeeIdSearchBox);
-       click(employeeListPage.employeeSearchButton);
+        click(employeeListPage.employeeListButton);
+        click(employeeListPage.employeeIdSearchBox);
+        sendText(employeeId, employeeListPage.employeeIdSearchBox);
+        click(employeeListPage.employeeSearchButton);
         System.out.println(employeeId);
         String actual = employeeListPage.employeeTable.getText();
         Thread.sleep(5000);
 
 
-
-       Assert.assertEquals(employeeId,actual);
+        Assert.assertEquals(employeeId, actual);
 
         System.out.println(employeeId);
 
@@ -66,10 +68,12 @@ public class AddAnEmployeeSteps extends CommonMethods {
         sendText(middlename, addEmployeePage.middleNameTextBox);
         sendText(lastname, addEmployeePage.lastNameTextBox);
     }
+
     @When("user clicks on save button")
     public void user_clicks_on_save_button() {
-      click(addEmployeePage.saveButton);
+        click(addEmployeePage.saveButton);
     }
+
     @Then("user is saved successfully")
     public void user_is_saved_successfully() {
         System.out.println("test passed successful");
@@ -78,12 +82,12 @@ public class AddAnEmployeeSteps extends CommonMethods {
     @When("user enters firstname and middlename and lastname and verify employee has been added")
     public void user_enters_firstname_middlename_and_lastname_and_verify_employee_has_been_added(io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
 
-        List<Map<String,String>> employeeNames=dataTable.asMaps();
+        List<Map<String, String>> employeeNames = dataTable.asMaps();
         for (Map<String, String> employee : employeeNames) {
 
-            String firstNameValue=employee.get("firstname");
-            String middleNameValue=employee.get("middlename");
-            String lastNameValue=employee.get("lastname");
+            String firstNameValue = employee.get("firstname");
+            String middleNameValue = employee.get("middlename");
+            String lastNameValue = employee.get("lastname");
 
             sendText(firstNameValue, addEmployeePage.firstNameTextBox);
             sendText(middleNameValue, addEmployeePage.middleNameTextBox);
@@ -93,110 +97,156 @@ public class AddAnEmployeeSteps extends CommonMethods {
             //click(addEmployeePage.addEmployeeButton);
 
 
-
-
-
             click(addEmployeePage.addEmployeeButton);
-
 
 
         }
     }
+
     @When("user adds employee using excel {string} and verify it")
     public void user_adds_employee_using_excel_and_verify_it(String sheetName) {
-        List<Map<String,String>> newEmployees= ExcelReader.read(sheetName, Constants.EXCEL_READER_PATH);
-        Iterator<Map<String,String >> itr=newEmployees.iterator();
+        List<Map<String, String>> newEmployees = ExcelReader.read(sheetName, Constants.EXCEL_READER_PATH);
+        Iterator<Map<String, String>> itr = newEmployees.iterator();
 
-        while (itr.hasNext()){
+        while (itr.hasNext()) {
 
-            Map<String,String> mapNewEmp=itr.next();
+            Map<String, String> mapNewEmp = itr.next();
 
-            sendText(mapNewEmp.get("firstName"),addEmployeePage.firstNameTextBox);
-            sendText(mapNewEmp.get("middleName"),addEmployeePage.middleNameTextBox);
-            sendText(mapNewEmp.get("lastName"),addEmployeePage.lastNameTextBox);
-            sendText(mapNewEmp.get("photograph"),addEmployeePage.photoButton);
+            sendText(mapNewEmp.get("firstName"), addEmployeePage.firstNameTextBox);
+            sendText(mapNewEmp.get("middleName"), addEmployeePage.middleNameTextBox);
+            sendText(mapNewEmp.get("lastName"), addEmployeePage.lastNameTextBox);
+            sendText(mapNewEmp.get("photograph"), addEmployeePage.photoButton);
 
             if (!addEmployeePage.createLoginDetails.isSelected()) {
                 click(addEmployeePage.createLoginDetails);
 
-                sendText(mapNewEmp.get("userName"),addEmployeePage.userNameTextBox);
-                sendText(mapNewEmp.get("password"),addEmployeePage.passwordTextBox);
-                sendText(mapNewEmp.get("confirmPassword"),addEmployeePage.passwordTextBox2);
+                sendText(mapNewEmp.get("userName"), addEmployeePage.userNameTextBox);
+                sendText(mapNewEmp.get("password"), addEmployeePage.passwordTextBox);
+                sendText(mapNewEmp.get("confirmPassword"), addEmployeePage.passwordTextBox2);
             }
 
-            String empIdValue= addEmployeePage.empIDField.getAttribute("value");
+            String empIdValue = addEmployeePage.empIDField.getAttribute("value");
             click(addEmployeePage.saveButton);
-
 
 
         }
 
     }
+
     @When("use adds {string} and {string} and {string}")
     public void use_adds_and_and(String firstName, String middleName, String lastName) {
-        this.firstName=firstName;
-        this.middleName=middleName;
-        this.lastName=lastName;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
 
         sendText(firstName, addEmployeePage.firstNameTextBox);
         sendText(middleName, addEmployeePage.middleNameTextBox);
         sendText(lastName, addEmployeePage.lastNameTextBox);
-        employeeId=addEmployeePage.empIDField.getAttribute("value");
+        employeeId = addEmployeePage.empIDField.getAttribute("value");
         click(addEmployeePage.saveButton);
 
 
     }
+
     @When("employee is added successfully")
     public void employee_is_added_successfully() {
         System.out.println("user has been added!");
     }
+
     @Then("user verfy in the database")
     public void user_verfy_in_the_database() {
-        String query="select emp_firstName,emp_middle_name,emp_lastname from hs_hr_employees where employee_id="+employeeId+";";
+        String query = "select emp_firstName,emp_middle_name,emp_lastname from hs_hr_employees where employee_id=" + employeeId + ";";
         System.out.println(query);
 
-        List<Map<String,String>>mapList=DBUtils.fetch(query);
+        List<Map<String, String>> mapList = DBUtils.fetch(query);
         Map<String, String> firstRow = mapList.get(0);
         String dbFirstname = firstRow.get("emp_firstName");
         String dbMiddleName = firstRow.get("emp_middle_name");
         String dbLastName = firstRow.get("emp_lastname");
         System.out.println("test passed");
-       Assert.assertEquals("Firstname from front end does not match firstname from database", firstName, dbFirstname);
+        Assert.assertEquals("Firstname from front end does not match firstname from database", firstName, dbFirstname);
         Assert.assertEquals("middlename from front end does not match middlename from database", middleName, dbMiddleName);
         Assert.assertEquals("lastname from front end does not match lastname from database", lastName, dbLastName);
-        System.out.println(firstName+lastName+middleName);
+        System.out.println(firstName + lastName + middleName);
     }
+
     @When("user clicks dependants tab")
     public void user_clicks_dependants_tab() {
         click(addEmployeePage.dependantsTab);
     }
+
     @When("user presses add button and provides the enters the information needed and clicks save")
-    public void user_presses_add_button_and_provides_the_enters_the_information_needed_and_clicks_save() {
+    public void user_presses_add_button_and_provides_the_enters_the_information_needed_and_clicks_save() throws InterruptedException {
         click(addEmployeePage.dependantAddButton);
-        sendText("babyLu",addEmployeePage.dependantName);
-        selectFromDropDown(addEmployeePage.relationshipDropDown,"Child");
+        sendText(ConfigReader.getPropertyValue("depName"),addEmployeePage.dependantName);
+
+
+
+        selectFromDropDown(addEmployeePage.relationshipDropDown, "Child");
         click(addEmployeePage.dependantsCal);
-        boolean isFound=false;
-        while (!isFound){
-            List<WebElement>calDate=driver.findElements(By.xpath("//table[@class='ui-datepicker-calendar']/tbody/tr/td"));
+        boolean isFound = false;
+        while (!isFound) {
+            List<WebElement> calDate = driver.findElements(By.xpath("//table[@class='ui-datepicker-calendar']/tbody/tr/td"));
             for (WebElement date : calDate) {
-                String getDate=date.getText();
-                if (getDate.equalsIgnoreCase("15")){
+                String getDate = date.getText();
+                if (getDate.equalsIgnoreCase("15")) {
                     System.out.println(getDate);
                     click(date);
-                    isFound=true;
+                    isFound = true;
                     break;
                 }
             }
         }
+        System.out.println("test");
+        String expected=addEmployeePage.dependantName.getText();
+        Thread.sleep(5000);
+        System.out.println(expected);
 
         click(addEmployeePage.dependantsSaveButton);
 
     }
+
     @Then("employees dependants are save successfully")
     public void employees_dependants_are_save_successfully() {
+      //  WebElement actualName = driver.findElement(By.xpath("//table[@id='dependent_list']/tbody/tr/td[2]"));
+      //  String actual=actualName.getText();
+        //System.out.println(actual);
+        String actual="Successfully Saved";
+        //System.out.println("this i actual "+actual);
+        WebElement expected =driver.findElement(By.xpath("//div[@class='message success fadable']"));
+        String maybe=expected.getText();
+        System.out.println(maybe);
+        System.out.println(actual);
+        Assert.assertEquals(maybe,actual);
+
 
     }
 
+
+    @When("user adds {string} and {string} and {string}")
+    public void user_adds_and_and(String firstname, String middlename, String lastname) {
+       sendText(firstname, addEmployeePage.firstNameTextBox);
+       sendText(middlename, addEmployeePage.middleNameTextBox);
+       sendText(lastname, addEmployeePage.lastNameTextBox);
+       click(addEmployeePage.saveButton);
+    }
+    @When("user clicks on qualifications tab")
+    public void user_clicks_on_qualifications_tab() {
+      click(addEmployeePage.qualificationsTab);
+    }
+    @When("user clicks the add button and provides the {string} and {string} needed and clicks save button")
+    public void user_clicks_the_add_button_and_provides_the_and_needed_and_clicks_save_button(String company, String jobTitle) throws InterruptedException {
+        click(addEmployeePage.addWorkExperienceButton);
+        sendText(company,addEmployeePage.companyField);
+        sendText(jobTitle,addEmployeePage.jobTitleField);
+        click(addEmployeePage.experienceSaveButton);
+        Thread.sleep(5000);
+
+
+    }
+    @Then("users work experience is successfully added")
+    public void users_work_experience_is_successfully_added() {
+        System.out.println("so far so good");
+    }
 
 }

@@ -6,6 +6,7 @@ import Utils.Constants;
 import Utils.ExcelReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
@@ -20,6 +21,7 @@ public class LoginSteps extends CommonMethods {
     public void user_enters_credentials_and_presses_enter() {
         sendText(ConfigReader.getPropertyValue("username"),loginPage.usernameField);
         sendText(ConfigReader.getPropertyValue("password"),loginPage.passwordField);
+
        click(loginPage.loginButton);
 
     }
@@ -36,6 +38,36 @@ public class LoginSteps extends CommonMethods {
     @Then("user must read excelfile")
     public void user_must_read_excelfile() {
         System.out.println(ExcelReader.read("EmployeeDataBatch16", Constants.EXCEL_READER_PATH));
+    }
+
+    @Given("user is nagivated to the application")
+    public void user_is_nagivated_to_the_application() {
+        System.out.println("im on the app");
+    }
+
+
+    @When("user enters invalid credentials")
+    public void user_enters_invalid_credentials() {
+        sendText("user", loginPage.usernameField);
+        sendText("money", loginPage.passwordField);
+    }
+    @When("clicks the save button")
+    public void clicks_the_save_button() {
+    click(loginPage.loginButton);
+    }
+    @Then("the user receives expected message")
+    public void the_user_receives_expected_message() {
+       String actual =driver.findElement(By.id("spanMessage")).getText();
+       String expected="Invalid credentials";
+
+        Assert.assertEquals(actual,expected);
+    }
+
+    @When("user enters {string} and {string}")
+    public void user_enters_and(String username, String password) {
+        sendText(username, loginPage.usernameField);
+        sendText(password, loginPage.passwordField);
+
     }
 
 }

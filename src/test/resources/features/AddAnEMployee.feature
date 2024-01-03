@@ -54,6 +54,23 @@ Feature: Adding an employee
                 And user presses add button and provides the enters the information needed and clicks save
                 Then employees dependants are save successfully
 
+                @experience
+                Scenario Outline: Adding work experience as an employee
+                  When user adds "<firstname>" and "<middlename>" and "<lastname>"
+                  And user clicks on save button
+                  And user clicks on qualifications tab
+                  And user clicks the add button and provides the "<company>" and "<jobTitle>" needed and clicks save button
+                  Then users work experience is successfully added
+
+                  Examples:
+                  |firstname|middlename|lastname|company|jobTitle|
+                  |big      |stepper   |king    |Verizon|p3       |
+                  |the      |best      |to do it|adidas |CEO      |
+                  |man      |in        |charge  |traphouse|trapper|
+
+
+
+
 
 
 

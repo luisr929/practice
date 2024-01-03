@@ -64,6 +64,22 @@ public class AddEmployeePage extends CommonMethods {
         public WebElement dependantsCalDate;
 
 
+        @FindBy(xpath = "//*[@id='sidenav']/li[10]/a")
+        public WebElement qualificationsTab;
+
+        @FindBy(id = "experience_employer")
+        public WebElement companyField;
+
+        @FindBy (id = "experience_jobtitle")
+        public WebElement jobTitleField;
+
+        @FindBy(id = "btnWorkExpSave")
+        public WebElement experienceSaveButton;
+
+        @FindBy(id = "addWorkExperience")
+        public WebElement addWorkExperienceButton;
+
+
 
 
         public AddEmployeePage(){
