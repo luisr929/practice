@@ -1,15 +1,13 @@
 package Steps;
 
-import Pages.AddEmployeePage;
-import Pages.EmployeeListPage;
-import Pages.HomePage;
-import Pages.LoginPage;
+import Pages.*;
 
 public class PageInitializer {
     public static LoginPage loginPage;
     public static HomePage homePage;
     public static EmployeeListPage employeeListPage;
     public static AddEmployeePage addEmployeePage;
+    public static EmployeePage employeePage;
 
 
 public static void initializePageObjects(){
@@ -17,6 +15,7 @@ public static void initializePageObjects(){
     homePage=new HomePage();
     employeeListPage=new EmployeeListPage();
     addEmployeePage=new AddEmployeePage();
+    employeePage=new EmployeePage();
 
 
 }

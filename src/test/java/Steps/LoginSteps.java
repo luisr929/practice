@@ -4,6 +4,7 @@ import Utils.CommonMethods;
 import Utils.ConfigReader;
 import Utils.Constants;
 import Utils.ExcelReader;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -70,4 +71,19 @@ public class LoginSteps extends CommonMethods {
 
     }
 
+    @When("user creates sceanrio steps")
+    public void userCreatesSceanrioSteps() {
+        System.out.println("done");
+    }
+
+    @And("user tries to generate step definitions without the runner")
+    public void userTriesToGenerateStepDefinitionsWithoutTheRunner() {
+        System.out.println("done1");
+
+    }
+
+    @Then("Step definitions will be generated")
+    public void stepDefinitionsWillBeGenerated() {
+        System.out.println("done2");
+    }
 }

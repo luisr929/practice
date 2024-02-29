@@ -29,3 +29,10 @@ Feature: User is able to login
           |money    |man   |
           |big      |Stepper|
 
+          @tester
+          Scenario: solving how to create step definitions without runner class
+            Given User is naviagted to home page
+            When user creates sceanrio steps
+            And user tries to generate step definitions without the runner
+            Then Step definitions will be generated
+
