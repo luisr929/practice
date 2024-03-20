@@ -8,6 +8,8 @@ import io.cucumber.java.en.When;
 import org.apache.poi.ss.formula.functions.Code;
 import org.junit.Assert;
 
+import java.util.Set;
+
 public class EmployeeSteps extends CommonMethods {
     @Given("User navigates to the login page")
     public void user_navigates_to_the_login_page() {
@@ -44,5 +46,7 @@ public class EmployeeSteps extends CommonMethods {
         System.out.println("actual "+actual);
         System.out.println("expected "+expected);
         Assert.assertEquals(expected,actual);
+        String handle= driver.getWindowHandle();
+        Set<String>handles=driver.getWindowHandles();
     }
 }

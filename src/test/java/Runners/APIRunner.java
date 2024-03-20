@@ -1,20 +1,22 @@
 package Runners;
 
-import io.cucumber.java.zh_cn.但是;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
+
         features = "src/test/resources/features/",
-        glue = "Steps",
+        glue = "APISteps",
         dryRun = false,
         tags = "@API",
         monochrome = true,
-        plugin = {"pretty", "html:target/cucumber.html", "json:target/cucumber.json", "rerun:target/failed.txt"}
+        plugin = {"pretty"}
+
+
+
 
 )
-
-public class RunnerClass {
+public class APIRunner {
 }
