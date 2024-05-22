@@ -1,5 +1,6 @@
 package Runners;
 
+import io.cucumber.java.zh_cn.但是;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
@@ -9,7 +10,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features/",
         glue = "Steps",
         dryRun = false,
-        tags = "@new",
+        tags = "@member",
         monochrome = true,
         plugin = {"pretty", "html:target/cucumber.html", "json:target/cucumber.json", "rerun:target/failed.txt"}
 

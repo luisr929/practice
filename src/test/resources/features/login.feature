@@ -1,7 +1,38 @@
 Feature: User is able to login
 
-  @test
+  @test @regression @smoke
   Scenario: User logs in as Admin
     Given driver is made and navigates to the url
     And user enters credentials and presses enter
     Then User is naviagted to home page
+    Then user must read excelfile
+
+    @google
+    Scenario: user is able to login into application
+
+      @invalid @regression @smoke
+      Scenario: Invalid login
+        Given user is nagivated to the application
+        When user enters invalid credentials
+        And clicks the save button
+        Then the user receives expected message
+
+        @invalids
+        Scenario Outline: Invalid login with multiple data sets
+          Given user is nagivated to the application
+          When user enters "<username>" and "<password>"
+          And clicks the save button
+          Then the user receives expected message
+          Examples:
+            |  username|password|
+          |lu       |wavy  |
+          |money    |man   |
+          |big      |Stepper|
+
+          @tester
+          Scenario: solving how to create step definitions without runner class
+            Given User is naviagted to home page
+            When user creates sceanrio steps
+            And user tries to generate step definitions without the runner
+            Then Step definitions will be generated
+
